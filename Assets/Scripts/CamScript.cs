@@ -23,7 +23,7 @@ public class CamScript : MonoBehaviour
         float vsp = speed * Input.GetAxis("Vertical");
         float scrollslp = zoomSpeed * (-Input.GetAxis("Mouse ScrollWheel"));
 
-        Vector3 verticalMove = new Vector3(0, scrollslp, 0);
+        Vector3 verticalMove = transform.forward * (-scrollslp);
         Vector3 lateralMove = hsp * transform.right;
         Vector3 forwardMove = transform.forward;
         forwardMove.y = 0;
