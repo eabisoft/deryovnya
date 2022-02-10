@@ -33,5 +33,22 @@ public class CamScript : MonoBehaviour
         Vector3 move = verticalMove + lateralMove + forwardMove;
 
         transform.position += move;
+
+        Vector3 mForw = transform.forward;
+        mForw.y = 0;
+        mForw.Normalize();
+        mForw *= speed;
+         
+        if (Input.mousePosition.x >= Screen.width - 5f)
+            transform.position += Vector3.right * speed;
+        if (Input.mousePosition.x <= 5f)
+            transform.position += Vector3.left * speed;
+        if (Input.mousePosition.y >= Screen.height - 5f){
+            transform.position += mForw;
+        }
+        if (Input.mousePosition.y <= 5f){
+            transform.position -= mForw;
+        }
+            
     }
 }
