@@ -5,22 +5,27 @@ using UnityEngine;
 public class RigScript : MonoBehaviour
 {
 
-    float speed = 0.05f;
-    float rotateAmount = 0.5f;
-    float rotateTime = 0.01f;
-    Quaternion newRotation;
+    public float moveSpeed = 10f;
+    public float rotationSpeed = 90f;
+    const float FRAME_OFFSET = 5f; 
 
     // Start is called before the first frame update
     void Start()
     {
-        newRotation = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float hsp = speed * Input.GetAxis("Horizontal");
-        float vsp = speed * Input.GetAxis("Vertical");
+        Move();
+        MoveByFrame();
+        Rotate();
+    }
+
+    void Move()
+    {
+        float hsp = moveSpeed * Input.GetAxis("Horizontal");
+        float vsp = moveSpeed * Input.GetAxis("Vertical");
 
         Vector3 lateralMove = hsp * transform.right;
         Vector3 forwardMove = transform.forward;
@@ -28,38 +33,45 @@ public class RigScript : MonoBehaviour
         forwardMove.Normalize();
         forwardMove *= vsp;
 
-        Vector3 move = lateralMove + forwardMove;
+        Vector3 move = (lateralMove + forwardMove) * Time.deltaTime;
 
         transform.position += move;
+    }
 
-
+    void MoveByFrame()
+    {
         Vector3 mForw = transform.forward;
         mForw.y = 0;
         mForw.Normalize();
-        mForw *= speed;
+        mForw *= moveSpeed * Time.deltaTime;
 
         Vector3 mRight = transform.right;
         mRight.y = 0;
         mRight.Normalize();
-        mRight *= speed;
-         
-        if (Input.mousePosition.x >= Screen.width - 5f)
-            transform.position += mRight;
-        if (Input.mousePosition.x <= 5f)
-            transform.position -= mRight;
-        if (Input.mousePosition.y >= Screen.height - 5f)
-            transform.position += mForw;
-        if (Input.mousePosition.y <= 5f)
-            transform.position -= mForw;
+        mRight *= moveSpeed * Time.deltaTime;
         
+        if (Input.mousePosition.x >= Screen.width - FRAME_OFFSET)
+            transform.position += mRight;
+        else if (Input.mousePosition.x <= FRAME_OFFSET)
+            transform.position -= mRight;
 
-        if (Input.GetKey(KeyCode.Q)){
-            newRotation *= Quaternion.Euler(Vector3.up * rotateAmount);
-        }
-        if (Input.GetKey(KeyCode.E)){
-            newRotation *= Quaternion.Euler(Vector3.up * -rotateAmount);
-        }
+        if (Input.mousePosition.y >= Screen.height - FRAME_OFFSET)
+            transform.position += mForw;
+        else if (Input.mousePosition.y <= FRAME_OFFSET)
+            transform.position -= mForw;
+    }
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, rotateTime);
+    void Rotate()
+    {
+        Vector3 rotation = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.Q))
+            rotation = Vector3.up;
+        else if (Input.GetKey(KeyCode.E))
+            rotation = Vector3.down;
+
+        rotation *= Time.deltaTime * rotationSpeed;
+
+        transform.Rotate(rotation);
     }
 }
