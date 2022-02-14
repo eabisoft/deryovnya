@@ -15,6 +15,11 @@ public class CamScript : MonoBehaviour
         float scrollslp = zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
         Vector3 verticalMove = transform.forward * scrollslp;
         Vector3 move = verticalMove;
+        if (transform.position.y == minHeight || transform.position.y == maxHeight){
+            move.x = 0;
+            move.z = 0;
+        }
+        
         transform.position += move;
     }
 
