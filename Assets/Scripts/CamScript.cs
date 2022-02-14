@@ -5,7 +5,7 @@ using UnityEngine;
 public class CamScript : MonoBehaviour
 {
     
-    float zoomSpeed = 50f;
+    float zoomSpeed = 5f;
 
     float maxHeight = 15f;
     float minHeight = 5f;
