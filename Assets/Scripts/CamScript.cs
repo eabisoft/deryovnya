@@ -10,6 +10,19 @@ public class CamScript : MonoBehaviour
     float maxHeight = 15f;
     float minHeight = 5f;
 
+
+    void Zoom() {
+        float scrollslp = zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
+        Vector3 verticalMove = transform.forward * scrollslp;
+        Vector3 move = verticalMove;
+        transform.position += move;
+    }
+
+    void Limiter() {
+        Vector3 pos = transform.position;
+        pos.y = Mathf.Clamp(pos.y, minHeight, maxHeight);
+        transform.position = pos;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -20,17 +33,15 @@ public class CamScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        float scrollslp = zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
+        Zoom();
+        Limiter();
 
 
-        Vector3 verticalMove = transform.forward * scrollslp;
-        
 
-        Vector3 move = verticalMove;
-        transform.position += move;
-        
         
             
     }
 }
+
+
+    
