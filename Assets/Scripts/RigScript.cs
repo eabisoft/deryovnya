@@ -18,7 +18,7 @@ public class RigScript : MonoBehaviour
     void Update()
     {
         Move();
-        MoveByFrame();
+        // MoveByFrame();
         Rotate();
     }
 
@@ -38,28 +38,28 @@ public class RigScript : MonoBehaviour
         transform.position += move;
     }
 
-    void MoveByFrame()
-    {
-        Vector3 mForw = transform.forward;
-        mForw.y = 0;
-        mForw.Normalize();
-        mForw *= moveSpeed * Time.deltaTime;
+    // void MoveByFrame()
+    // {
+    //     Vector3 mForw = transform.forward;
+    //     mForw.y = 0;
+    //     mForw.Normalize();
+    //     mForw *= moveSpeed * Time.deltaTime;
 
-        Vector3 mRight = transform.right;
-        mRight.y = 0;
-        mRight.Normalize();
-        mRight *= moveSpeed * Time.deltaTime;
+    //     Vector3 mRight = transform.right;
+    //     mRight.y = 0;
+    //     mRight.Normalize();
+    //     mRight *= moveSpeed * Time.deltaTime;
         
-        if (Input.mousePosition.x >= Screen.width - FRAME_OFFSET)
-            transform.position += mRight;
-        else if (Input.mousePosition.x <= FRAME_OFFSET)
-            transform.position -= mRight;
+    //     if (Input.mousePosition.x >= Screen.width - FRAME_OFFSET)
+    //         transform.position += mRight;
+    //     else if (Input.mousePosition.x <= FRAME_OFFSET)
+    //         transform.position -= mRight;
 
-        if (Input.mousePosition.y >= Screen.height - FRAME_OFFSET)
-            transform.position += mForw;
-        else if (Input.mousePosition.y <= FRAME_OFFSET)
-            transform.position -= mForw;
-    }
+    //     if (Input.mousePosition.y >= Screen.height - FRAME_OFFSET)
+    //         transform.position += mForw;
+    //     else if (Input.mousePosition.y <= FRAME_OFFSET)
+    //         transform.position -= mForw;
+    // }
 
     void Rotate()
     {
