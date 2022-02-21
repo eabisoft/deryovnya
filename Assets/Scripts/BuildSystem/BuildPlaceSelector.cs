@@ -22,9 +22,10 @@ public class BuildPlaceSelector : MonoBehaviour
 
     public void ColorBuildable() {
         var renderer = GetComponent<Renderer>();
-        renderer.material.SetColor("_Color", Color.red);
+        renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
+        renderer.material.color = Color.red * 0.5f;
         if (BuildManager.currentBuilding.GetComponent<Buildable>().CanBePlaced()) {
-            renderer.material.SetColor("_Color", Color.blue);
+            renderer.material.color = Color.blue * 0.5f;
         }
     }
     
@@ -32,7 +33,7 @@ public class BuildPlaceSelector : MonoBehaviour
         //Поднял объекты чиста по приколу, коллизии считаются со всех сторон, так что наверное надо будет на микрописю
         //левитировать наши кубы
         //Хотя у нас есть тег для земли...
-        coordinates.y = 3f;
+        // coordinates.y = 3f;
         //Эту хрень на всякий запихнул, чтобы объект при столкновении не вращался, как ебанутый
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         BuildManager.currentBuilding.transform.position = coordinates;
