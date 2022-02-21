@@ -14,6 +14,9 @@ public class BuildManager : ScriptableSingleton<BuildManager>
 
     static public void ChangeCurrentBuilding(GameObject newBuilding) {
         // addtitonal logic here
+        if (_currentBuilding != null)
+            Destroy(_currentBuilding);
+
         _currentBuilding = Instantiate(newBuilding);
         _currentBuilding.AddComponent<BuildPlaceSelector>();
     }

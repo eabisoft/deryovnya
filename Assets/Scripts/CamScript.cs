@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class CamScript : MonoBehaviour
 {
-    
     float zoomSpeed = 5f;
-
     float maxHeight = 15f;
     float minHeight = 5f;
 
-
-    void Zoom() {
+    private void Zoom() {
         float scrollslp = zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
         Vector3 verticalMove = transform.forward * scrollslp;
         Vector3 move = verticalMove;
@@ -23,30 +20,19 @@ public class CamScript : MonoBehaviour
         transform.position += move;
     }
 
-    void Limiter() {
+    private void Limiter() {
         Vector3 pos = transform.position;
         pos.y = Mathf.Clamp(pos.y, minHeight, maxHeight);
         transform.position = pos;
     }
     
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Zoom();
         Limiter();
-
-
-
-        
-            
     }
 }
-
-
     

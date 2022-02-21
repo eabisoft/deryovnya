@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class RigScript : MonoBehaviour
 {
-
     public float moveSpeed = 10f;
     public float rotationSpeed = 90f;
     const float FRAME_OFFSET = 5f; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Move();
         // MoveByFrame();
         Rotate();
     }
 
-    void Move()
-    {
+    private void Move() {
         float hsp = moveSpeed * Input.GetAxis("Horizontal");
         float vsp = moveSpeed * Input.GetAxis("Vertical");
 
@@ -38,7 +32,7 @@ public class RigScript : MonoBehaviour
         transform.position += move;
     }
 
-    // void MoveByFrame()
+    // private void MoveByFrame()
     // {
     //     Vector3 mForw = transform.forward;
     //     mForw.y = 0;
@@ -61,8 +55,7 @@ public class RigScript : MonoBehaviour
     //         transform.position -= mForw;
     // }
 
-    void Rotate()
-    {
+    private void Rotate() {
         Vector3 rotation = Vector3.zero;
 
         if (Input.GetKey(KeyCode.Q))

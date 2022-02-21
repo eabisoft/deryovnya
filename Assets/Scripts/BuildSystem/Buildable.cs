@@ -6,13 +6,14 @@ public class Buildable : MonoBehaviour
 {
     public bool collides = false;
 
-
     private void OnCollisionEnter(Collision other) {
-        collides = true;
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+            collides = true;
     }
 
     private void OnCollisionStay(Collision other) {
-        collides = true;
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+            collides = true;
     }
 
     private void OnCollisionExit(Collision other) {
@@ -20,15 +21,8 @@ public class Buildable : MonoBehaviour
     }
 
     public bool CanBePlaced() {
-        if (collides == true){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !collides;
     }
 
 }
-
-
     
