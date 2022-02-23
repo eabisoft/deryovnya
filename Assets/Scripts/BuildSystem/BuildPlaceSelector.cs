@@ -6,6 +6,8 @@ public class BuildPlaceSelector : MonoBehaviour
 {
     private const float MAX_RAY_DISTANCE = 50f;
     private Vector3 coordinates;
+    private Vector3 surfaceNormal;
+    private Quaternion surfaceRotation;
     void Start() {
         
     }
@@ -29,8 +31,9 @@ public class BuildPlaceSelector : MonoBehaviour
     }
 
     private void ReplacePattern() {
-        transform.position = coordinates;
-        // TODO выравнивание по высоте 
+        transform.rotation = surfaceRotation;
+        Vector3 heightFix = surfaceNormal * GetComponent<MeshFilter>().mesh.bounds.size.y / 2;
+        transform.position = coordinates + heightFix;
     }
 
     private void OnBuild() {
@@ -59,6 +62,8 @@ public class BuildPlaceSelector : MonoBehaviour
         int groundMask = LayerMask.GetMask("Ground");
         if (Physics.Raycast(ray, out RaycastHit hitInfo, MAX_RAY_DISTANCE, groundMask)) {
             coordinates = hitInfo.point;
+            surfaceNormal = hitInfo.normal;
+            surfaceRotation = hitInfo.collider.transform.rotation;
         }
     }
 }
