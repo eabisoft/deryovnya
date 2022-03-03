@@ -9,9 +9,6 @@ public class BuildPlaceSelector : MonoBehaviour
     private Vector3 surfaceNormal;
     private Quaternion surfaceRotation;
 
-     public GameObject obj;
-
-
     void Start() {
 
     }
@@ -68,7 +65,6 @@ public class BuildPlaceSelector : MonoBehaviour
             }
         }
     }
-
 
     private void DrawLine() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
