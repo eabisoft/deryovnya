@@ -6,7 +6,7 @@ using UnityEditor;
 public class BuildManager : ScriptableSingleton<BuildManager>
 {
     static public GameObject _currentBuilding;
-    static public GameObject layout = GameObject.Find("Canvas");
+    static public GameObject layout = GameObject.Find("BuildPanel");
 
     static public GameObject currentBuilding 
     {
