@@ -8,14 +8,21 @@ public class BuildPlaceSelector : MonoBehaviour
     private Vector3 coordinates;
     private Vector3 surfaceNormal;
     private Quaternion surfaceRotation;
+
+     public GameObject obj;
+
+
     void Start() {
-        
+
     }
 
     void Update() {
         DrawLine();
         ReplacePattern();
         ColorBuildable();
+        if (Input.GetKey(KeyCode.Escape)){
+            Delete();
+        }
         if (Input.GetMouseButton(0)) {
             OnBuild();
         }
@@ -34,6 +41,11 @@ public class BuildPlaceSelector : MonoBehaviour
         transform.rotation = surfaceRotation;
         Vector3 heightFix = surfaceNormal * GetComponent<MeshFilter>().mesh.bounds.size.y / 2;
         transform.position = coordinates + heightFix;
+    }
+
+    private void Delete() {
+        Destroy(this.gameObject);
+        BuildManager.ClearCurrentBuildingIfEqual(this.gameObject);
     }
 
     private void OnBuild() {
@@ -56,6 +68,7 @@ public class BuildPlaceSelector : MonoBehaviour
             }
         }
     }
+
 
     private void DrawLine() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

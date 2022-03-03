@@ -10,6 +10,7 @@ public class Buildable : MonoBehaviour
     [Range(0f, 180f)]
     public float maxTiltAngle = 0;
 
+
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
             collides = true;
@@ -38,5 +39,7 @@ public class Buildable : MonoBehaviour
     public bool CanBePlaced() {
         return !collides && TiltAngelInRange();
     }
+
+    
 
 }
