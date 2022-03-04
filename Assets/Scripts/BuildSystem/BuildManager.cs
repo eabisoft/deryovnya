@@ -13,10 +13,6 @@ public class BuildManager : ScriptableSingleton<BuildManager>
         get {return _currentBuilding; }
     }
 
-    void start() {
-
-    }
-
     static public void ChangeCurrentBuilding(GameObject newBuilding) {
         // addtitonal logic here
         if (_currentBuilding != null)  
@@ -27,11 +23,21 @@ public class BuildManager : ScriptableSingleton<BuildManager>
         layout.gameObject.SetActive(false);
     }
 
-    static public void ClearCurrentBuildingIfEqual(GameObject gameObject) {
-        layout.gameObject.SetActive(true);
-        if (_currentBuilding.Equals(gameObject)) {
+    static public void CancelBuild(GameObject gameObject) {
+        if (gameObject == _currentBuilding) {
             _currentBuilding = null;
+            layout.gameObject.SetActive(true);
         }
+        // Additional logic here
+        Destroy(gameObject);
+    }
+
+    static public void Build(GameObject gameObject) {
+        if (gameObject == _currentBuilding) {
+            _currentBuilding = null;
+            layout.gameObject.SetActive(true);
+        }
+        // Additional logic here
     }
 
 }

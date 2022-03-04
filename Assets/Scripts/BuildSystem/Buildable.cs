@@ -6,7 +6,6 @@ public class Buildable : MonoBehaviour
 {
     private bool collides = false;
 
-    // TODO see TiltAngelInRange 
     [Range(0f, 180f)]
     public float maxTiltAngle = 0;
 
@@ -25,10 +24,8 @@ public class Buildable : MonoBehaviour
     }
 
     private bool TiltAngelInRange() {
+        // they are in the range [0,360]
         var angles = transform.rotation.eulerAngles;
-        Debug.Log(angles);
-        // TODO The eulerAngles range must be checked or they normalized ?
-        // I assume that they are in the range [0,360]
         
         // TODO add an inaccurate comparison using some delta
         return (angles.x <= maxTiltAngle || angles.x >= (360f - maxTiltAngle))
