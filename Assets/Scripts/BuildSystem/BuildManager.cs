@@ -20,13 +20,13 @@ public class BuildManager : ScriptableSingleton<BuildManager>
 
         _currentBuilding = Instantiate(newBuilding);
         _currentBuilding.AddComponent<BuildPlaceSelector>();
-        layout.gameObject.SetActive(false);
+        layout.SetActive(false);
     }
 
     static public void CancelBuild(GameObject gameObject) {
         if (gameObject == _currentBuilding) {
             _currentBuilding = null;
-            layout.gameObject.SetActive(true);
+            layout.SetActive(true);
         }
         // Additional logic here
         Destroy(gameObject);
@@ -35,7 +35,7 @@ public class BuildManager : ScriptableSingleton<BuildManager>
     static public void Build(GameObject gameObject) {
         if (gameObject == _currentBuilding) {
             _currentBuilding = null;
-            layout.gameObject.SetActive(true);
+            layout.SetActive(true);
         }
         // Additional logic here
     }
