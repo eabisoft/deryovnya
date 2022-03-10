@@ -37,6 +37,8 @@ public class BuildManager : ScriptableSingleton<BuildManager>
             _currentBuilding = null;
             layout.SetActive(true);
         }
+
+        gameObject.AddComponent<BuildProcess>();
         // Additional logic here
     }
 
