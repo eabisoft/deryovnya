@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class RigScript : MonoBehaviour
 {
-
     public float moveSpeed = 10f;
     public float rotationSpeed = 90f;
     const float FRAME_OFFSET = 5f; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Move();
-        MoveByFrame();
+        // MoveByFrame();
         Rotate();
     }
 
-    void Move()
-    {
+    private void Move() {
         float hsp = moveSpeed * Input.GetAxis("Horizontal");
         float vsp = moveSpeed * Input.GetAxis("Vertical");
 
@@ -38,31 +32,30 @@ public class RigScript : MonoBehaviour
         transform.position += move;
     }
 
-    void MoveByFrame()
-    {
-        Vector3 mForw = transform.forward;
-        mForw.y = 0;
-        mForw.Normalize();
-        mForw *= moveSpeed * Time.deltaTime;
+    // private void MoveByFrame()
+    // {
+    //     Vector3 mForw = transform.forward;
+    //     mForw.y = 0;
+    //     mForw.Normalize();
+    //     mForw *= moveSpeed * Time.deltaTime;
 
-        Vector3 mRight = transform.right;
-        mRight.y = 0;
-        mRight.Normalize();
-        mRight *= moveSpeed * Time.deltaTime;
+    //     Vector3 mRight = transform.right;
+    //     mRight.y = 0;
+    //     mRight.Normalize();
+    //     mRight *= moveSpeed * Time.deltaTime;
         
-        if (Input.mousePosition.x >= Screen.width - FRAME_OFFSET)
-            transform.position += mRight;
-        else if (Input.mousePosition.x <= FRAME_OFFSET)
-            transform.position -= mRight;
+    //     if (Input.mousePosition.x >= Screen.width - FRAME_OFFSET)
+    //         transform.position += mRight;
+    //     else if (Input.mousePosition.x <= FRAME_OFFSET)
+    //         transform.position -= mRight;
 
-        if (Input.mousePosition.y >= Screen.height - FRAME_OFFSET)
-            transform.position += mForw;
-        else if (Input.mousePosition.y <= FRAME_OFFSET)
-            transform.position -= mForw;
-    }
+    //     if (Input.mousePosition.y >= Screen.height - FRAME_OFFSET)
+    //         transform.position += mForw;
+    //     else if (Input.mousePosition.y <= FRAME_OFFSET)
+    //         transform.position -= mForw;
+    // }
 
-    void Rotate()
-    {
+    private void Rotate() {
         Vector3 rotation = Vector3.zero;
 
         if (Input.GetKey(KeyCode.Q))
