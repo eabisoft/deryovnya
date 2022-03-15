@@ -14,6 +14,6 @@ public class UiInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myText.text = "Бабки: " + CsGlobal.money;
+        myText.text = "Бабки: " + ((float)(int)(CsGlobal.money * 100)) / 100;;
     }
 }

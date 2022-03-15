@@ -16,6 +16,7 @@ public class BuildProcess : MonoBehaviour
     }
 
     void OnBuild() {
+        gameObject.AddComponent<IncomeProcess>();
         Destroy(GetComponent<BuildProcess>());
     }
 
@@ -23,7 +24,6 @@ public class BuildProcess : MonoBehaviour
         elapsedTicks++;
         gameObject.transform.Translate(offset / buildTicks);
         if (buildTicks == elapsedTicks) {
-            gameObject.AddComponent<IncomeProcess>();
             OnBuild();
         }
     }
