@@ -109,8 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7869d6899ea5fec4c84a70f4f5b7dd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collides: 0
-  maxTiltAngle: 0
+  maxTiltAngle: 79.9
 --- !u!54 &6392186306042183249
 Rigidbody:
   m_ObjectHideFlags: 0

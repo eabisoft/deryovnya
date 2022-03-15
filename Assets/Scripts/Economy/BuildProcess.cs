@@ -5,9 +5,10 @@ using UnityEngine;
 public class BuildProcess : MonoBehaviour
 {
     // TODO move to buildable ?
-    public int buildTicks = 50 * 10;
+    public int buildTicks = 10 * 10;
     private Vector3 offset;
     private float elapsedTicks;
+
     void Start()
     {
         offset = new Vector3(0, GetComponent<MeshFilter>().mesh.bounds.size.y, 0);
@@ -15,7 +16,6 @@ public class BuildProcess : MonoBehaviour
     }
 
     void OnBuild() {
-        Debug.Log("ok");
         Destroy(GetComponent<BuildProcess>());
     }
 
@@ -23,6 +23,7 @@ public class BuildProcess : MonoBehaviour
         elapsedTicks++;
         gameObject.transform.Translate(offset / buildTicks);
         if (buildTicks == elapsedTicks) {
+            gameObject.AddComponent<IncomeProcess>();
             OnBuild();
         }
     }

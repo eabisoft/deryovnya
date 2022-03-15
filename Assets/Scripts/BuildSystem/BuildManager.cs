@@ -33,10 +33,14 @@ public class BuildManager : ScriptableSingleton<BuildManager>
     }
 
     static public void Build(GameObject gameObject) {
-        if (gameObject == _currentBuilding) {
+        if (!CsGlobal.moneyChecker()){
+            CancelBuild(currentBuilding);
+        }
+        else if (gameObject == _currentBuilding) {
             _currentBuilding = null;
             layout.SetActive(true);
         }
+        
 
         gameObject.AddComponent<BuildProcess>();
         // Additional logic here
