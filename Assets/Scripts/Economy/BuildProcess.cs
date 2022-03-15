@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildProcess : MonoBehaviour
 {
-    // TODO move to buildable ?
+    // TODO move to basic build class?
     public int buildTicks = 10 * 10;
     private Vector3 offset;
     private float elapsedTicks;
@@ -12,7 +12,7 @@ public class BuildProcess : MonoBehaviour
     void Start()
     {
         offset = new Vector3(0, GetComponent<MeshFilter>().mesh.bounds.size.y, 0);
-        gameObject.transform.Translate(-offset);
+        transform.Translate(-offset);
     }
 
     void OnBuild() {
@@ -22,7 +22,7 @@ public class BuildProcess : MonoBehaviour
 
     void FixedUpdate() {
         elapsedTicks++;
-        gameObject.transform.Translate(offset / buildTicks);
+        transform.Translate(offset / buildTicks);
         if (buildTicks == elapsedTicks) {
             OnBuild();
         }
