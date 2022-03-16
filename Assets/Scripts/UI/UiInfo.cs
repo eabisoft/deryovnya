@@ -8,6 +8,8 @@ public class UiInfo : MonoBehaviour
 
     void Update()
     {
-        myText.text = "Money: " + CsGlobal.money.ToString("0.00");
+        myText.text = "Food: " + ResourcesManager.Resources[Resource.Food] + 
+            "\nTree: " + ResourcesManager.Resources[Resource.Tree] + 
+            "\nStone: " + ResourcesManager.Resources[Resource.Stone];
     }
 }

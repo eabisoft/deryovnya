@@ -33,7 +33,7 @@ public class BuildManager : ScriptableSingleton<BuildManager>
     }
 
     static public void Build(GameObject gameObject) {
-        if (!CsGlobal.moneyChecker()){
+        if (!ResourcesManager.Decrease(gameObject.GetComponent<Buildable>().buildCost.Clone())){
             CancelBuild(currentBuilding);
         }
         else if (gameObject == _currentBuilding) {

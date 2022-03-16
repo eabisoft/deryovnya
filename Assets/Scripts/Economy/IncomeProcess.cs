@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class IncomeProcess : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private int ticks;
+    private Production production;
+
+    void Start() {
+        production = GetComponent<Production>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        CsGlobal.money += 0.001f;
+        ticks++;
+        if (ticks == production.requiredTicks) {
+            production.Produce();
+            ticks = 0;
+        }
     }
 }

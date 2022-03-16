@@ -9,6 +9,8 @@ public class Buildable : MonoBehaviour
     [Range(0f, 180f)]
     public float maxTiltAngle = 0;
 
+    public ResourcesDictionary buildCost;
+
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
             collides = true;
