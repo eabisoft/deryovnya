@@ -27,7 +27,8 @@ public class CamScript : MonoBehaviour
     }
     
     void Start() {
-        
+        //Мб потом отдельный файл для настроек сделаем и туда эту шнягу запихнем
+        Application.targetFrameRate = 60;
     }
 
     void Update() {
