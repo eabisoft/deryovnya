@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-public class ResourcesManager : ScriptableSingleton<ResourcesManager>
+public class ResourcesManager : ScriptableObject
 {
     // TODO add all new resource types to this dictionary
     private static Dictionary<Resource, int> resources = new Dictionary<Resource, int> {
