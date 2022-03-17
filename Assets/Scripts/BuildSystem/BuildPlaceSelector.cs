@@ -10,9 +10,11 @@ public class BuildPlaceSelector : MonoBehaviour
     private Vector3 coordinates;
     private Vector3 surfaceNormal;
     private Quaternion surfaceRotation;
+    private Material defaultMaterial;
 
 
     void Start() {
+        defaultMaterial = GetComponent<Renderer>().sharedMaterial;
         GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
     }
 
@@ -51,8 +53,7 @@ public class BuildPlaceSelector : MonoBehaviour
             
             if (GetComponent<Buildable>().CanBePlaced()) {
                 // TODO Добавление нужных компонентов строящемуся объекту
-                // Ну там не обязательно цвет белый был по итогу, переделать потом
-                renderer.material.SetColor("_Color", Color.white);
+                renderer.material = defaultMaterial;
                 
                 Destroy(this.GetComponent<BuildPlaceSelector>());
                 BuildManager.Build(this.gameObject);
