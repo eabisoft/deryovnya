@@ -4,36 +4,41 @@ using UnityEngine;
 
 public class Buildable : MonoBehaviour
 {
-    [SerializeField]
-    private bool needsResPlace = false;
-
-    [SerializeField]
-    private bool collides = false;
-
+    public Resource resourceTypeToCollide = Resource.None;
     [Range(0f, 180f)]
     public float maxTiltAngle = 0;
-
     public ResourcesDictionary buildCost;
+    private bool isNotCollides = true;
+    private bool isCollidesWithResourse = false;
+    
+    private void collisionCheck(Collision other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Resource")) {
+            if (other.gameObject.GetComponent<ResourceSource>().type == resourceTypeToCollide)
+                isCollidesWithResourse = true;
+            else 
+                isNotCollides = false;
+        } else if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) {
+            isNotCollides = false;
+        }
+    }
 
     private void OnCollisionEnter(Collision other) {
-        if (needsResPlace == true && other.gameObject.layer == LayerMask.NameToLayer("Resource"))
-            collides = false;
-        else if (needsResPlace == false && other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-            collides = true;
+        collisionCheck(other);
     }
 
     private void OnCollisionStay(Collision other) {
-        if (needsResPlace == true && other.gameObject.layer == LayerMask.NameToLayer("Resource"))
-            collides = false;
-        else if (needsResPlace == false && other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-            collides = true;
+        collisionCheck(other);
     }
 
     private void OnCollisionExit(Collision other) {
-        if (needsResPlace == true) 
-            collides = true;
-        else 
-            collides = false;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Resource")) {
+            if (other.gameObject.GetComponent<ResourceSource>().type == resourceTypeToCollide)
+                isCollidesWithResourse = false;
+            else 
+                isNotCollides = true;
+        } else if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) {
+            isNotCollides = true;
+        }
     }
 
     private bool TiltAngelInRange() {
@@ -47,7 +52,9 @@ public class Buildable : MonoBehaviour
     }
 
     public bool CanBePlaced() {
-        return !collides && TiltAngelInRange();
+        return isNotCollides // Проверка отсутвия коллизий с другими игровыми объектами
+        && TiltAngelInRange() // Проверка нахождения в пределах угла наклона
+        && (resourceTypeToCollide == Resource.None || isCollidesWithResourse); // Проверка наличия ресурса при его необходимости
     }
 
 }

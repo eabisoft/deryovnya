@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7869d6899ea5fec4c84a70f4f5b7dd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceTypeToCollide: 0
   maxTiltAngle: 53.4
   buildCost:
     reorderableList:
@@ -151,8 +152,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 00000000
-    _keys: 00000000
+    _keyValues: 02000000
+    _keys: 02000000
     _values: 0a000000
 --- !u!114 &-5689476058931761173
 MonoBehaviour:
