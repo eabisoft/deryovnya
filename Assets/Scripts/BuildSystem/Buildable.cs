@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Buildable : MonoBehaviour
 {
+    [SerializeField]
+    private bool needsResPlace = false;
+
+    [SerializeField]
     private bool collides = false;
 
     [Range(0f, 180f)]
@@ -12,17 +16,24 @@ public class Buildable : MonoBehaviour
     public ResourcesDictionary buildCost;
 
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        if (needsResPlace == true && other.gameObject.layer == LayerMask.NameToLayer("Resource"))
+            collides = false;
+        else if (needsResPlace == false && other.gameObject.layer != LayerMask.NameToLayer("Ground"))
             collides = true;
     }
 
     private void OnCollisionStay(Collision other) {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+        if (needsResPlace == true && other.gameObject.layer == LayerMask.NameToLayer("Resource"))
+            collides = false;
+        else if (needsResPlace == false && other.gameObject.layer != LayerMask.NameToLayer("Ground"))
             collides = true;
     }
 
     private void OnCollisionExit(Collision other) {
-        collides = false;
+        if (needsResPlace == true) 
+            collides = true;
+        else 
+            collides = false;
     }
 
     private bool TiltAngelInRange() {
