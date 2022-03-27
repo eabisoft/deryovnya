@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceTypeToCollide: 0
-  maxTiltAngle: 53.4
+  maxTiltAngle: 52
   buildCost:
     reorderableList:
       canAdd: 1
