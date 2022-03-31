@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba4d3184b57b65f4087578ce340503a4, type: 2}
+  - {fileID: 2100000, guid: 82a10a519ca993e429a98d1b0420b7fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,7 +112,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &2961090593473682905
@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7869d6899ea5fec4c84a70f4f5b7dd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTiltAngle: 53.4
+  resourceTypeToCollide: 0
+  maxTiltAngle: 52
   buildCost:
     reorderableList:
       canAdd: 1
@@ -151,8 +152,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 00000000
-    _keys: 00000000
+    _keyValues: 02000000
+    _keys: 02000000
     _values: 0a000000
 --- !u!114 &-5689476058931761173
 MonoBehaviour:
@@ -173,7 +174,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 0
+      isExpanded: 1
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -188,7 +189,7 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 0
+    isExpanded: 1
     _keyValues: 
     _keys: 
     _values: 

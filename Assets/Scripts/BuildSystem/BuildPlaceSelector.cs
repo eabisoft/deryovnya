@@ -12,7 +12,6 @@ public class BuildPlaceSelector : MonoBehaviour
     private Quaternion surfaceRotation;
     private Material defaultMaterial;
 
-
     void Start() {
         defaultMaterial = GetComponent<Renderer>().sharedMaterial;
         GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
@@ -64,11 +63,38 @@ public class BuildPlaceSelector : MonoBehaviour
     private void RaycastToSurface() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         int groundMask = LayerMask.GetMask("Ground");
-        hasSurfaceHit = Physics.Raycast(ray, out RaycastHit hitInfo, MAX_RAY_DISTANCE, groundMask); 
+        hasSurfaceHit = Physics.Raycast(ray, out RaycastHit hit, MAX_RAY_DISTANCE, groundMask); 
         if (hasSurfaceHit) {
-            coordinates = hitInfo.point;
-            surfaceNormal = hitInfo.normal;
-            surfaceRotation = hitInfo.collider.transform.rotation;
+            // https://docs.unity3d.com/ScriptReference/RaycastHit-triangleIndex.html
+            // Получаем координаты вершин теугольника, в который мы попали
+            MeshCollider meshCollider = hit.collider as MeshCollider;
+            Mesh mesh = meshCollider.sharedMesh;
+            Vector3[] vertices = mesh.vertices;
+            int[] triangles = mesh.triangles;
+            Vector3 p0 = vertices[triangles[hit.triangleIndex * 3 + 0]];
+            Vector3 p1 = vertices[triangles[hit.triangleIndex * 3 + 1]];
+            Vector3 p2 = vertices[triangles[hit.triangleIndex * 3 + 2]];
+            Transform hitTransform = hit.collider.transform;
+            p0 = hitTransform.TransformPoint(p0);
+            p1 = hitTransform.TransformPoint(p1);
+            p2 = hitTransform.TransformPoint(p2);
+
+            // Подсветка треугольника
+            Debug.DrawLine(p0, p1, Color.black, 1f);
+            Debug.DrawLine(p1, p2, Color.black, 1f);
+            Debug.DrawLine(p2, p0, Color.black, 1f);
+
+            // https://docs.unity3d.com/2019.3/Documentation/Manual/ComputingNormalPerpendicularVector.html
+            // На основе вершин высчитываем нормаль и нормализуем ее
+            surfaceNormal = Vector3.Normalize(Vector3.Cross(p1 - p0, p2 - p0));
+
+            // Подсветка нормали 
+            Debug.DrawLine((p0 + p1 + p2) / 3, (p0 + p1 + p2) / 3 + surfaceNormal * 2, Color.blue, 1f);
+
+            // С помощью нормали получаем квантерион поворота
+            surfaceRotation = Quaternion.LookRotation(transform.forward, surfaceNormal);
+            
+            coordinates = hit.point;
         }
     }
 }

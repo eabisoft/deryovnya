@@ -4,25 +4,41 @@ using UnityEngine;
 
 public class Buildable : MonoBehaviour
 {
-    private bool collides = false;
-
+    public Resource resourceTypeToCollide = Resource.None;
     [Range(0f, 180f)]
     public float maxTiltAngle = 0;
-
     public ResourcesDictionary buildCost;
+    private bool isNotCollides = true;
+    private bool isCollidesWithResourse = false;
+    
+    private void collisionCheck(Collision other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Resource")) {
+            if (other.gameObject.GetComponent<ResourceSource>().type == resourceTypeToCollide)
+                isCollidesWithResourse = true;
+            else 
+                isNotCollides = false;
+        } else if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) {
+            isNotCollides = false;
+        }
+    }
 
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-            collides = true;
+        collisionCheck(other);
     }
 
     private void OnCollisionStay(Collision other) {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
-            collides = true;
+        collisionCheck(other);
     }
 
     private void OnCollisionExit(Collision other) {
-        collides = false;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Resource")) {
+            if (other.gameObject.GetComponent<ResourceSource>().type == resourceTypeToCollide)
+                isCollidesWithResourse = false;
+            else 
+                isNotCollides = true;
+        } else if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) {
+            isNotCollides = true;
+        }
     }
 
     private bool TiltAngelInRange() {
@@ -36,7 +52,9 @@ public class Buildable : MonoBehaviour
     }
 
     public bool CanBePlaced() {
-        return !collides && TiltAngelInRange();
+        return isNotCollides // Проверка отсутвия коллизий с другими игровыми объектами
+        && TiltAngelInRange() // Проверка нахождения в пределах угла наклона
+        && (resourceTypeToCollide == Resource.None || isCollidesWithResourse); // Проверка наличия ресурса при его необходимости
     }
 
 }
