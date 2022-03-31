@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-public class BuildManager : ScriptableSingleton<BuildManager>
+public class BuildManager : ScriptableObject
 {
     static private GameObject _currentBuilding;
     static public GameObject layout = GameObject.Find("BuildPanel");
@@ -33,10 +32,16 @@ public class BuildManager : ScriptableSingleton<BuildManager>
     }
 
     static public void Build(GameObject gameObject) {
-        if (gameObject == _currentBuilding) {
+        if (!ResourcesManager.Decrease(gameObject.GetComponent<Buildable>().buildCost.Clone())){
+            CancelBuild(currentBuilding);
+        }
+        else if (gameObject == _currentBuilding) {
             _currentBuilding = null;
             layout.SetActive(true);
         }
+        
+
+        gameObject.AddComponent<BuildProcess>();
         // Additional logic here
     }
 
