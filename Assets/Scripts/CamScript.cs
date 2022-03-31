@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CamScript : MonoBehaviour
 {
-    float zoomSpeed = 5f;
-    float maxHeight = 15f;
-    float minHeight = 5f;
+    public float zoomSpeed = 5f;
+    public float maxHeight = 15f;
+    public float minHeight = 5f;
 
     private void Zoom() {
         float scrollslp = zoomSpeed * Input.GetAxis("Mouse ScrollWheel");
