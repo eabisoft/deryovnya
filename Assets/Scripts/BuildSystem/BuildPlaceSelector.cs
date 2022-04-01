@@ -79,20 +79,12 @@ public class BuildPlaceSelector : MonoBehaviour
             p1 = hitTransform.TransformPoint(p1);
             p2 = hitTransform.TransformPoint(p2);
 
-            // Подсветка треугольника
-            Debug.DrawLine(p0, p1, Color.black, 1f);
-            Debug.DrawLine(p1, p2, Color.black, 1f);
-            Debug.DrawLine(p2, p0, Color.black, 1f);
-
             // https://docs.unity3d.com/2019.3/Documentation/Manual/ComputingNormalPerpendicularVector.html
             // На основе вершин высчитываем нормаль и нормализуем ее
             surfaceNormal = Vector3.Normalize(Vector3.Cross(p1 - p0, p2 - p0));
 
-            // Подсветка нормали 
-            Debug.DrawLine((p0 + p1 + p2) / 3, (p0 + p1 + p2) / 3 + surfaceNormal * 2, Color.blue, 1f);
-
             // С помощью нормали получаем квантерион поворота
-            surfaceRotation = Quaternion.LookRotation(transform.forward, surfaceNormal);
+            surfaceRotation = Quaternion.FromToRotation(Vector3.up, surfaceNormal);
             
             coordinates = hit.point;
         }
