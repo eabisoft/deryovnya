@@ -1,3 +1,3 @@
 # deryovnya
 Командная разработка экономического симулятора
-![gif](https://github.com/eabisoft/deryovnya/blob/master/ezgif.com-gif-maker.gif)
+![gif](https://media.githubusercontent.com/media/eabisoft/deryovnya/master/ezgif.com-gif-maker.gif?token=AK4UKKDCKBDE5WKAQK2CES3CXHMHE)
