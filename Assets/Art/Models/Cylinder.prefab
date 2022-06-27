@@ -190,9 +190,9 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 
-    _keys: 
-    _values: 
+    _keyValues: 03000000
+    _keys: 03000000
+    _values: 00000000
   output:
     reorderableList:
       canAdd: 1
@@ -216,7 +216,7 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 02000000
-    _keys: 02000000
+    _keyValues: 01000000
+    _keys: 01000000
     _values: 01000000
   requiredTicks: 5
